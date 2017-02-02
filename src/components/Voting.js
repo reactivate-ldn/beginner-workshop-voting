@@ -33,12 +33,13 @@ const Item = styled.a`
   }
 `;
 
-const Voting = () => (
+const Voting = ({ answers, onClick }) => (
   <Row>
-    <Item>+1</Item>
-    <Item>+1</Item>
-    <Item>+1</Item>
-    <Item>+1</Item>
+    {
+      answers.map((a, key) =>
+        <Item key={key} onClick={onClick.bind(this, a.id)}>+1</Item>
+      )
+    }
   </Row>
 );
 

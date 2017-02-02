@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPoll } from './actions/poll';
+import { getPoll, addVote } from './actions/poll';
 import { pollId } from './constants/poll';
 
 import Container from './components/Container';
@@ -14,6 +14,10 @@ class App extends Component {
     this.props.getPoll(pollId);
   }
 
+  onClick = (answerId) => {
+    this.props.addVote(pollId, answerId);
+  }
+
   render() {
     const { poll } = this.props;
     if (!poll) {
@@ -24,7 +28,7 @@ class App extends Component {
       <Container>
         <Title>{poll.title}</Title>
         <Chart answers={poll.answer}/>
-        <Voting/>
+        <Voting answers={poll.answer} onClick={this.onClick}/>
       </Container>
     );
   }
@@ -33,5 +37,6 @@ class App extends Component {
 export default connect((state, props) => ({
   poll: state.polls[pollId]
 }), dispatch => ({
-  getPoll: pollId => getPoll(pollId)(dispatch)
+  getPoll: pollId => getPoll(pollId)(dispatch),
+  addVote: (pollId, answerId) => addVote(pollId, answerId)(dispatch)
 }))(App);
