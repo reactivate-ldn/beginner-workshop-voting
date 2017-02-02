@@ -5,7 +5,7 @@ export default function reduce(state = {}, action) {
   switch(type) {
     case SET_POLL:
       state[payload.id] = payload;
-      return state;
+      return { ...state };
     default:
       return state;
   }

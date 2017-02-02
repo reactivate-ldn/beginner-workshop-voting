@@ -13,14 +13,9 @@ const style = {
   }
 };
 
-const Chart = () => (
+const Chart = ({ answers }) => (
   <VictoryBar
-    data={[
-      { option: 'React', votes: 100 },
-      { option: 'Ember', votes: 80 },
-      { option: 'Angular', votes: 20 },
-      { option: 'Vue', votes: 25 }
-    ]}
+    data={answers.map(a => ({ option: a.answer, votes: a.votes }))}
     x="option"
     y={({ votes }) => votes}
     labels={({ option }) => option}

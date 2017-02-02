@@ -15,16 +15,23 @@ class App extends Component {
   }
 
   render() {
+    const { poll } = this.props;
+    if (!poll) {
+      return null;
+    }
+
     return (
       <Container>
-        <Title>Which is your favourite JS front-end library?</Title>
-        <Chart/>
+        <Title>{poll.title}</Title>
+        <Chart answers={poll.answer}/>
         <Voting/>
       </Container>
     );
   }
 }
 
-export default connect(null, dispatch => ({
+export default connect((state, props) => ({
+  poll: state.polls[pollId]
+}), dispatch => ({
   getPoll: pollId => getPoll(pollId)(dispatch)
 }))(App);
