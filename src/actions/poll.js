@@ -7,7 +7,7 @@ const setPoll = (payload) => ({
 });
 
 export const getPoll = (pollId) => dispatch => (
-  fetch(`${config.url}/polls/${pollId}`)
+  fetch(`${config.url}/poll?pollId=${pollId}`)
   .then(res => res.json())
   .then(poll => dispatch(setPoll(poll)))
 );
