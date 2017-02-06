@@ -4,10 +4,8 @@ import {
   SET_POLL
 } from '../constants/poll';
 
-const setPoll = (payload) => ({
-  type: SET_POLL,
-  payload
-});
+// TODO: Add action creator for `SET_POLL` action type
+const setPoll = () => null;
 
 const req = (url, body, method = 'GET') => new Request(url, {
   method,
@@ -19,17 +17,8 @@ const req = (url, body, method = 'GET') => new Request(url, {
   body,
 });
 
-export const getPoll = () => dispatch => {
-  fetch(`${API_URL}/poll?pollId=${POLL_ID}`)
-    .then(res => res.json())
-    .then(poll => dispatch(setPoll(poll)));
-};
+// TODO: Add thunk creator for `getPoll`
+export const getPoll = () => null;
 
-export const addVote = answerId => dispatch => {
-  fetch(req(`${API_URL}/poll/vote`, JSON.stringify({
-    pollId: POLL_ID,
-    answerId
-  }), 'POST'))
-    .then(res => res.json())
-    .then(poll => dispatch(setPoll(poll)));
-};
+// TODO: Add thunk creator for `addVote`
+export const addVote = () => null;

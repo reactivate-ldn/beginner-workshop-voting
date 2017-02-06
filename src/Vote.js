@@ -3,33 +3,22 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { getPoll, addVote } from './actions/poll';
-import { pollId } from './constants/poll';
 
 import Container from './components/Container';
 import Title from './components/Title';
-import Chart from './components/chart';
+import BarChart from './components/BarChart';
 import Voting from './components/Voting';
 
 class App extends Component {
-  onClick = answerId => {
-    this.props.addVote(answerId);
-  };
-
-  componentDidMount() {
-    this.props.getPoll();
-  }
+  // TODO: Add `onClick` handler
+  // TODO: Execute `getPoll` on mount
 
   render() {
     const { poll } = this.props;
 
     if (!poll) {
-      return (
-        <Container>
-          <Title>
-            Loading...
-          </Title>
-        </Container>
-      );
+      // TODO: Add a nice loading screen / message
+      return null;
     }
 
     return (
@@ -38,11 +27,11 @@ class App extends Component {
           {poll.title}
         </Title>
 
-        <Chart answers={poll.answer}/>
+        <BarChart answers={poll.answer}/>
 
         <Voting
           answers={poll.answer}
-          onClick={this.onClick}
+          onClick={undefined}
         />
       </Container>
     );
@@ -50,12 +39,12 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  poll: state.poll
+  // TODO: Add `poll` from `state`
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getPoll: () => getPoll(),
-  addVote: answerId => addVote(answerId)
+  // TODO: Add `getPoll` action creator
+  // TODO: Add `addVote` action creator
 }, dispatch)
 
 export default connect(
