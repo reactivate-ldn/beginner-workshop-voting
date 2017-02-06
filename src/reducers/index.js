@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import pollReducer from './poll';
 
 const rootReducer = combineReducers({
-  polls: pollReducer
+  poll: pollReducer
 });
 
 export default rootReducer;

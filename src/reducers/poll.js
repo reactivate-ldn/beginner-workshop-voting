@@ -1,16 +1,10 @@
 import { SET_POLL } from '../constants/poll';
 
-export default function pollReducer(state = {}, action) {
+export default function pollReducer(state, action) {
   const { type, payload } = action;
 
-  switch(type) {
-    case SET_POLL: {
-      return {
-        ...state,
-        [payload.id]: payload
-      };
-    }
-
+  switch (type) {
+    case SET_POLL: return payload;
     default: return state;
   }
 }

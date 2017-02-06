@@ -1,5 +1,8 @@
-import config from '../config.json';
-import { SET_POLL } from '../constants/poll';
+import {
+  API_URL,
+  POLL_ID,
+  SET_POLL
+} from '../constants/poll';
 
 const setPoll = (payload) => ({
   type: SET_POLL,
@@ -17,14 +20,14 @@ const req = (url, body, method = 'GET') => new Request(url, {
 });
 
 export const getPoll = pollId => dispatch => {
-  fetch(`${config.url}/poll?pollId=${pollId}`)
+  fetch(`${API_URL}/poll?pollId=${POLL_ID}`)
     .then(res => res.json())
     .then(poll => dispatch(setPoll(poll)));
 };
 
-export const addVote = (pollId, answerId) => dispatch => {
-  fetch(req(`${config.url}/poll/vote`, JSON.stringify({
-    pollId,
+export const addVote = answerId => dispatch => {
+  fetch(req(`${API_URL}/poll/vote`, JSON.stringify({
+    pollId: POLL_ID,
     answerId
   }), 'POST'))
     .then(res => res.json())

@@ -12,18 +12,24 @@ import Voting from './components/Voting';
 
 class App extends Component {
   onClick = answerId => {
-    this.props.addVote(pollId, answerId);
+    this.props.addVote(answerId);
   };
 
   componentDidMount() {
-    this.props.getPoll(pollId);
+    this.props.getPoll();
   }
 
   render() {
     const { poll } = this.props;
 
     if (!poll) {
-      return null;
+      return (
+        <Container>
+          <Title>
+            Loading...
+          </Title>
+        </Container>
+      );
     }
 
     return (
@@ -44,12 +50,12 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  poll: state.polls[pollId]
+  poll: state.poll
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getPoll: pollId => getPoll(pollId),
-  addVote: (pollId, answerId) => addVote(pollId, answerId)
+  getPoll: () => getPoll(),
+  addVote: answerId => addVote(answerId)
 })(dispatch)
 
 export default connect(
