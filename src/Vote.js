@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import { getPoll, addVote } from './actions/poll';
 import { pollId } from './constants/poll';
 
@@ -9,34 +11,48 @@ import Chart from './components/chart';
 import Voting from './components/Voting';
 
 class App extends Component {
-
-  componentWillMount() {
-    this.props.getPoll(pollId);
-  }
-
-  onClick = (answerId) => {
+  onClick = answerId => {
     this.props.addVote(pollId, answerId);
+  };
+
+  componentDidMount() {
+    this.props.getPoll(pollId);
   }
 
   render() {
     const { poll } = this.props;
+
     if (!poll) {
       return null;
     }
 
     return (
       <Container>
-        <Title>{poll.title}</Title>
+        <Title>
+          {poll.title}
+        </Title>
+
         <Chart answers={poll.answer}/>
-        <Voting answers={poll.answer} onClick={this.onClick}/>
+
+        <Voting
+          answers={poll.answer}
+          onClick={this.onClick}
+        />
       </Container>
     );
   }
 }
 
-export default connect((state, props) => ({
+const mapStateToProps = state => ({
   poll: state.polls[pollId]
-}), dispatch => ({
-  getPoll: pollId => getPoll(pollId)(dispatch),
-  addVote: (pollId, answerId) => addVote(pollId, answerId)(dispatch)
-}))(App);
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getPoll: pollId => getPoll(pollId),
+  addVote: (pollId, answerId) => addVote(pollId, answerId)
+})(dispatch)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

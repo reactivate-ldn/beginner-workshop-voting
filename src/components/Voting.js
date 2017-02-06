@@ -36,9 +36,14 @@ const Item = styled.a`
 const Voting = ({ answers, onClick }) => (
   <Row>
     {
-      answers.map((a, key) =>
-        <Item key={key} onClick={onClick.bind(this, a.id)}>+1</Item>
-      )
+      answers.map(({ id }, key) => (
+        <Item
+          key={key}
+          onClick={() => onClick(id)}
+        >
+          +1
+        </Item>
+      ))
     }
   </Row>
 );

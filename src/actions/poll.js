@@ -16,18 +16,17 @@ const req = (url, body, method = 'GET') => new Request(url, {
   body,
 });
 
-
-export const getPoll = pollId => dispatch => (
+export const getPoll = pollId => dispatch => {
   fetch(`${config.url}/poll?pollId=${pollId}`)
-  .then(res => res.json())
-  .then(poll => dispatch(setPoll(poll)))
-);
+    .then(res => res.json())
+    .then(poll => dispatch(setPoll(poll)));
+};
 
-export const addVote = (pollId, answerId) => dispatch => (
+export const addVote = (pollId, answerId) => dispatch => {
   fetch(req(`${config.url}/poll/vote`, JSON.stringify({
     pollId,
     answerId
   }), 'POST'))
-  .then(res => res.json())
-  .then(poll => dispatch(setPoll(poll)))
-);
+    .then(res => res.json())
+    .then(poll => dispatch(setPoll(poll)));
+};
