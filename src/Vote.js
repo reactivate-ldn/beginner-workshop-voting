@@ -56,7 +56,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   getPoll: () => getPoll(),
   addVote: answerId => addVote(answerId)
-})(dispatch)
+}, dispatch)
 
 export default connect(
   mapStateToProps,

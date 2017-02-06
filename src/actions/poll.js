@@ -19,7 +19,7 @@ const req = (url, body, method = 'GET') => new Request(url, {
   body,
 });
 
-export const getPoll = pollId => dispatch => {
+export const getPoll = () => dispatch => {
   fetch(`${API_URL}/poll?pollId=${POLL_ID}`)
     .then(res => res.json())
     .then(poll => dispatch(setPoll(poll)));
