@@ -12,13 +12,19 @@ import Voting from './components/Voting';
 class App extends Component {
   // TODO: Add `onClick` handler
   // TODO: Execute `getPoll` on mount
+  componentWillMount() {
+    this.props.getPoll();
+  }
 
   render() {
     const { poll } = this.props;
-
+    // this.props.getPoll();
+    console.log(poll);
     if (!poll) {
-      // TODO: Add a nice loading screen / message
-      return null;
+      return (
+        <h1>Hello I am loading...</h1>
+      )
+      // return null;
     }
 
     return (
@@ -39,10 +45,12 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
+  poll: state.poll
   // TODO: Add `poll` from `state`
-})
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
+  getPoll: () => getPoll()
   // TODO: Add `getPoll` action creator
   // TODO: Add `addVote` action creator
 }, dispatch)
